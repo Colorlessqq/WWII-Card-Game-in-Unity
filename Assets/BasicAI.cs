@@ -8,8 +8,11 @@ public class BasicAI : MonoBehaviour
     StateManager stateManager;
     public void PlayAI()
     {
+        //
         FindAndAttack();
+        //
         PlayCard();
+        //
         TryToMove();
         
     }
@@ -81,4 +84,6 @@ public class BasicAI : MonoBehaviour
     {
         stateManager = FindObjectOfType<StateManager>();
     }
+
+
 }

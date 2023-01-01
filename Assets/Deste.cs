@@ -22,12 +22,16 @@ public class Deste : MonoBehaviour
             stateManager.Announce("Destenizde kart kalmadı"); 
             return;
         }
+        if (!stateManager.Playergold_1()) 
+        {
+            stateManager.Announce("Kart çekmek için cephane yetersiz");
+            return;
+        }
         int x = Random.Range(0, myDeck.Count);
         GameObject newCard = Instantiate(myDeck[x]);
         myDeck.RemoveAt(x);
         newCard.tag = "Player";
         newCard.transform.SetParent(spawnLine.transform);
-
     }
     public void ReturnCardToEnemeyHand()
     {
@@ -37,6 +41,8 @@ public class Deste : MonoBehaviour
         myDeck.RemoveAt(x);
         newCard.transform.SetParent(spawnLine.transform);
         newCard.tag = "Enemy";
+        Interactive inter = newCard.GetComponent<Interactive>();
+        inter.image.gameObject.SetActive(true);
         
 
     }
@@ -49,7 +55,12 @@ public class Deste : MonoBehaviour
             int x = Random.Range(0, myDeck.Count);
             GameObject newCard = Instantiate(myDeck[x]);
             myDeck.RemoveAt(x);
-            if (isEnemyDeck) { newCard.tag = "Enemy"; }
+            if (isEnemyDeck) 
+            {
+                newCard.tag = "Enemy";
+                Interactive inter = newCard.GetComponent<Interactive>();
+                inter.image.gameObject.SetActive(true);
+            }
             else
             {
                 newCard.tag = "Player";

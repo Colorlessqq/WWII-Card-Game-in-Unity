@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPointerExitHandler
@@ -14,12 +15,14 @@ public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPoi
     [SerializeField] TextMeshProUGUI attack;
     [SerializeField] public TextMeshProUGUI cost;
     [SerializeField] TextMeshProUGUI ammunation;
-    [SerializeField] Image image;
+    [SerializeField] public Image image;
     [SerializeField] public int range;
+    [SerializeField] Canvas naziwin;
+    [SerializeField] Canvas sovyetwin;
     public int CardLine = -10;
     public bool isPlayed = false;
     StateManager stateManager;
-    public bool weNeedAnimation = false;
+    public bool isBase = false;
     public void OnDrop(PointerEventData eventData)
     {
         // Eğer tur senin değilse sonlandır
@@ -39,6 +42,21 @@ public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPoi
                 if (int.Parse(health.text) < 1)
                 {
                     Destroy(this.gameObject);
+                    if (isBase) 
+                    {
+                        if (CompareTag("Player")) 
+                        {
+                            naziwin.gameObject.SetActive(true);
+                            sovyetwin.gameObject.SetActive(false);
+                            stateManager.GameOver = true;
+                        }
+                        else
+                        {
+                            stateManager.GameOver = true;
+                            naziwin.gameObject.SetActive(false);
+                            sovyetwin.gameObject.SetActive(true);
+                        }
+                    }
                 }
             }
         }
@@ -47,23 +65,25 @@ public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPoi
     [System.Obsolete]
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Eğer tur senin değilse sonlandır
-        if (!stateManager.isPlayerTurn) { return; }
-
         try
         {
+            Image image1 = gameObject.GetComponentInChildren<Image>();
             if (eventData.pointerDrag.gameObject.tag == this.tag && isPlayed)
             {
-                image.color = Color.gray;
+
+                image1.color = Color.gray;
             }
             else if (eventData.pointerDrag.gameObject.tag != this.tag && isPlayed)
             {
-                image.color = Color.red;
+                image1.color = Color.red;
+            }
+            else
+            {
+                image1.color = Color.gray;
             }
         }
         catch (NullReferenceException)
         {
-
         }
         
         
@@ -71,9 +91,8 @@ public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPoi
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Eğer tur senin değilse sonlandır
-        if (!stateManager.isPlayerTurn) { return; }
-        image.color = Color.white;
+        Image image1 = gameObject.GetComponentInChildren<Image>();
+        image1.color = Color.white;
     }
 
     void Start()

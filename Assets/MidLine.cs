@@ -21,7 +21,9 @@ public class MidLine : MonoBehaviour, IDropHandler
         }
         
       
-        if (this.gameObject.transform.childCount >= maxCard) { print("maxium card"); return; }
+        if (this.gameObject.transform.childCount >= maxCard) {
+            stateManager.Announce("Bu hizada yeterince kart var");
+            print("maxium card"); return; }
 
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -42,7 +44,10 @@ public class MidLine : MonoBehaviour, IDropHandler
         //}
 
         Interactive inter = eventData.pointerDrag.gameObject.GetComponent<Interactive>();
-        if (!stateManager.MoveCard(inter)) { return; }
+        if (!stateManager.MoveCard(inter)) 
+        {
+            stateManager.Announce("Cephane Yetersiz");
+            return; }
         inter.CardLine = 1;
         d.original_parent = this.transform;
     }

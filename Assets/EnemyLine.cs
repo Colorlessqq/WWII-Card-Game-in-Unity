@@ -25,6 +25,7 @@ public class EnemyLine : MonoBehaviour, IDropHandler
         {
             inter.isPlayed = true;
         }
+        inter.image.gameObject.SetActive(false);
         inter.CardLine = 0;
         inter.transform.parent = this.transform;
     }

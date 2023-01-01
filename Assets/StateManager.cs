@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StateManager : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class StateManager : MonoBehaviour
     [SerializeField] EnemyLine enemyLine1;
     [SerializeField] EnemyLine enemyLine2;
     [SerializeField] MidLine midLine;
+    [SerializeField] Deste destePlayer;
+    [SerializeField] Deste desteEnemy;
     BasicAI basicAI;
-    public bool weNeedAnimation = false;
+    public bool GameOver = false;
+
     public void EndPlayerTurn()
     {
         if (isPlayerTurn) { isPlayerTurn = false; }
@@ -29,6 +33,7 @@ public class StateManager : MonoBehaviour
     {
         if (isPlayerTurn) { return; }
         else { isPlayerTurn = true; }
+        desteEnemy.ReturnCardToEnemeyHand();
         enemyGold.text = (int.Parse(enemyGold.text) + 4).ToString();
     }
 
@@ -56,20 +61,13 @@ public class StateManager : MonoBehaviour
         if (attacker.CompareTag("Enemy")) { return true; }
         if (int.Parse(playerGold.text) < int.Parse(attacker.cost.text)) 
         {
-            Announce("Saldırmak için yeterli cephane");
+            Announce("Saldırmak için yetersiz cephane");
             print("cephane yetersiz");
             return false;
         }
-        if (attacker.CompareTag("Player"))
-        {
             playerGold.text = (int.Parse(playerGold.text) - int.Parse(attacker.cost.text)).ToString();
             print("playerGold");
-        }
-        else
-        {
-            enemyGold.text = (int.Parse(enemyGold.text) - int.Parse(attacker.cost.text)).ToString();
-            print("enemyGold");
-        }
+
         return true;
     }
 
@@ -83,7 +81,7 @@ public class StateManager : MonoBehaviour
             {
                 if (int.Parse(playerGold.text) < int.Parse(playedCard.cost.text))
                 {
-                    Announce("Hareket etmek için yeterli cephane");
+                    Announce("Hareket etmek için yetersiz cephane");
                     return false;
                 }
                 playedCard.isPlayed= true;
@@ -164,16 +162,22 @@ public class StateManager : MonoBehaviour
     //    return false;
     //}
 
-
+    public bool Playergold_1()
+    {
+        if (int.Parse(playerGold.text) < 1) { return false; }
+        playerGold.text = (int.Parse(playerGold.text) - 1).ToString();
+        return true;
+    }
 
 
 
     public void MoveEnemyCard(Interactive movedCard)
     {
-        print(movedCard.name);
+        print(movedCard.name + " burda");
         if (int.Parse(enemyGold.text) < int.Parse(movedCard.cost.text)) { return ; }
         if (midLine.MoveCardToMidLine(movedCard))
         {
+            print(movedCard.name + " ve burda");
             enemyGold.text = (int.Parse(enemyGold.text) - int.Parse(movedCard.cost.text)).ToString();
         }
 
@@ -182,10 +186,18 @@ public class StateManager : MonoBehaviour
     {
         if (movedCard.tag == "Enemy") { return true; }
         if (!movedCard.isPlayed) { return false; }
-        if (int.Parse(playerGold.text) < int.Parse(movedCard.cost.text)) { return false; }
+        if (int.Parse(playerGold.text) < int.Parse(movedCard.cost.text)) 
+        {
+            Announce("Cephane yetersiz");
+            return false; }
         playerGold.text = (int.Parse(playerGold.text) - int.Parse(movedCard.cost.text)).ToString();
         return true;
 
+    }
+
+    private void Awake()
+    {
+        GameOver = false;   
     }
 
     private void Start()

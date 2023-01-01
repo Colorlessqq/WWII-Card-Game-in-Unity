@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - EnemyBase
   - PlayerBase
+  - Back
   layers:
   - Default
   - TransparentFX
