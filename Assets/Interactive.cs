@@ -46,15 +46,16 @@ public class Interactive : MonoBehaviour, IDropHandler,IPointerEnterHandler,IPoi
                     {
                         if (CompareTag("Player")) 
                         {
-                            naziwin.gameObject.SetActive(true);
-                            sovyetwin.gameObject.SetActive(false);
-                            stateManager.GameOver = true;
-                        }
-                        else
-                        {
                             stateManager.GameOver = true;
                             naziwin.gameObject.SetActive(false);
                             sovyetwin.gameObject.SetActive(true);
+
+                        }
+                        else
+                        {
+                            naziwin.gameObject.SetActive(true);
+                            sovyetwin.gameObject.SetActive(false);
+                            stateManager.GameOver = true;
                         }
                     }
                 }

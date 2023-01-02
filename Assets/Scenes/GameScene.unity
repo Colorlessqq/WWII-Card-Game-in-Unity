@@ -7462,8 +7462,8 @@ MonoBehaviour:
   ammunation: {fileID: 0}
   image: {fileID: 1767486368}
   range: 0
-  naziwin: {fileID: 0}
-  sovyetwin: {fileID: 0}
+  naziwin: {fileID: 783905650}
+  sovyetwin: {fileID: 1715866105}
   CardLine: 0
   isPlayed: 1
   isBase: 1
