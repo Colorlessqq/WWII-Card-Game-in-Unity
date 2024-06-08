@@ -15,8 +15,10 @@ WWII Card Battle is a strategic turn-based card game set during World War II. Pl
 3. Press Play!
 
 ## Screenshots
-![Screenshot 1](path/to/screenshot1.png)
-![Screenshot 2](path/to/screenshot2.png)
+![1](https://github.com/Colorlessqq/WWII-Card-Game-in-Unity/assets/121122928/5e36f8f2-644d-4e1b-8ba2-55dc6ee83fcd)
+![2](https://github.com/Colorlessqq/WWII-Card-Game-in-Unity/assets/121122928/a6528010-8b54-43aa-96c0-9556902d4d1e)
+
+
 
 ## Credits
 - Developers: Mahmut Akarsu and Ahmet Ençakar
