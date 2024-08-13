@@ -11,7 +11,7 @@ WWII Card Battle is a strategic turn-based card game set during World War II. Pl
 
 ## Setup Instructions
 1. Clone this repository: `git clone https://github.com/Colorlessqq/WWII-Card-Game-in-Unity.git`
-2. Open the project in Unity (version x.x.x recommended)
+2. Open the project in Unity
 3. Press Play!
 
 ## Screenshots
