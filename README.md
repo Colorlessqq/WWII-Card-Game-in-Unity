@@ -1,10 +1,7 @@
 # WWII Card Battle
 
-![Game Logo](path/to/logo.png)
-
 ## Description
-WWII Card Battle is a strategic turn-based card game set during World War II. Players command military units and deploy tactics to destory enemy base. Designed as a school project.
-## Features
+WWII Card Battle is a strategic turn-based card game set during World War II. Players command military units and deploy tactics to destory enemy base.
 - Deck Building: Customize your deck with different units and tactic.
 - Play against Ai: Game features a simple ai you can play against.
 - Create Your Strategy: You can play a limited number of cards each turn, so plan your moves carefully to win.
